@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js --host 0.0.0.0"
+    "start": "nodemon index.js"
   },
-  "author": "Joaquin Puente",
+  "author": "Víctor Robles",
   "license": "MIT",
   "devDependencies": {
     "body-parser": "^1.20.1",

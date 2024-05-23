@@ -1,20 +1,18 @@
-'use strict'
+const mongoose = require('mongoose');
+const app = require('./app'); // Assuming you have an app.js file where you set up your Express app
+const port = 3700;
 
-var mongoose = require('mongoose');
-var username = encodeURIComponent("pue22296")
-var password = encodeURIComponent("portafolio1234")
-var app = require('./app');
-var port = 3700;
+const mongoUri = process.env.MONGO_URI || 'mongodb+srv://pue22296:portafolio1234@cluster0.7oxuczy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/portafolio';
 
-mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.7oxuczy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/portafolio`)
-        .then(() => {
-        	console.log("Conexión a la base de datos establecida satisfactoriamente...");
+mongoose.connect(mongoUri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(() => {
+  console.log("Conexión a la base de datos establecida satisfactoriamente...");
 
-        	// Creacion del servidor
-        	app.listen(port, () => {
-        		console.log("Servidor corriendo correctamente en la url: localhost:3700");
-        	});
+  // Creacion del servidor
+  app.listen(port, () => {
+    console.log(`Servidor corriendo correctamente en la url: localhost:${port}`);
+  });
 
-        })
-        .catch(err => console.log(err));
+}).catch(err => console.log('Error al conectar a la base de datos:', err));
